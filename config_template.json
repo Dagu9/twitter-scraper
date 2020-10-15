@@ -1,0 +1,23 @@
+{   
+    "max_tweet_age":1, 
+    "number_of_tweets":50,
+
+    "api_keys":{
+        "consumer_key":"XXXXXXXXXXXXXX",
+        "consumer_secret":"XXXXXXXXXXXXXX",
+        "access_token_key":"XXXXXXXXXXXXXX",
+		"access_token_secret":"XXXXXXXXXXXXXX"
+    },
+
+    "users": [
+        { "name" : "username1"},
+        { "name" : "username2"}
+    ],
+
+    "db":{
+        "db_server":"localhost",
+        "db_port":27017,
+        "db_name":"Db_Name",
+        "max_number_of_documents":50
+    }
+}
