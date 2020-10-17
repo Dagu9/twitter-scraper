@@ -86,17 +86,21 @@ if __name__=='__main__':
 
 	db = DB(config)
 
-	if db.get_count("tweets") > config["db"]["max_number_of_documents"]:
-		db.delete_last_n("tweets",10)
+	if db.get_count("tweets") > config['db']['max_number_of_documents']:
+		print(f"[*] Deleting last {config['db']['documents_to_delete']} tweets from DB")
+		db.delete_last_n("tweets", config['db']['documents_to_delete'])
 
 
 	for user in tweets.keys():
+		print(f"[*] Inserting tweets of {user} in the DB")
 		for i,tweet in enumerate(tweets[user]):
 			#print(f'{i+1}) \t{tweet["creation_date"]} \n\t {tweet["text"]}')
 			to_insert = {"user":user, **tweet} 
 			db.insert_one("tweets", to_insert)
 
+	print("[*] Done")
 	
 	#TODO
-	# 1. store also tweet link and other infos
-	# 2. store users ids in db ???
+	# 1. Create web service
+	# 2. store also tweet link and other infos
+	# 3. Create a logging class to print things in a better way
