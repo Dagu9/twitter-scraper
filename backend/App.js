@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
 
+//static pages
+app.use(express.static('../frontend'));
+
 function escapeRegExp(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 }
@@ -42,7 +45,7 @@ app.get('/users/:user/tweets', function(req,res){
 
 });
 
-// Return all tweets from a user matching a keyword
+// Returns all tweets from a user matching a keyword
 app.get('/users/:user/tweets/:keyword', function(req,res){
     var user = req.params.user;
     var keyword = req.params.keyword;
@@ -69,7 +72,7 @@ app.get('/users/:user/tweets/:keyword', function(req,res){
 // Returns all tweets in db
 app.get('/tweets', function(req, res){
 
-    db.collection(coll).find({}).toArray((err, result) => {
+    db.collection(coll).find({}).sort("creation_date", -1).toArray((err, result) => {
         if (err) throw err;
         
         if(result)
